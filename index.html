@@ -46,18 +46,7 @@
         }
 
         .welcome-label { font-size: 20px; font-weight: bold; margin-bottom: 5px; text-align: center;}
-        
-        /* UPDATED GREET NOTE STYLE */
-        .greet-note { 
-            font-size: 13px; 
-            opacity: 0.95; 
-            margin-bottom: 30px; 
-            font-style: italic; 
-            border-bottom: 1px solid rgba(255,255,255,0.3); 
-            padding-bottom: 15px; 
-            text-align: center;
-            line-height: 1.4; /* Better spacing for two lines */
-        }
+        .greet-note { font-size: 13px; opacity: 0.95; margin-bottom: 30px; font-style: italic; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 15px; text-align: center;}
 
         .menu-item { padding: 12px 15px; cursor: pointer; border-radius: 8px; transition: 0.3s; font-weight: 500; margin-bottom: 5px; }
         .menu-item:hover { background-color: #00796B; }
@@ -92,9 +81,6 @@
             transition: 0.3s;
         }
         .search-btn:hover { background-color: #00251a; }
-
-        .logout-btn { margin-top: auto; background-color: rgba(0,0,0,0.1); border: none; padding: 15px; color: white; cursor: pointer; border-radius: 8px; font-weight: bold; text-align: left; }
-        .logout-btn:hover { background-color: rgba(0,0,0,0.2); }
 
         /* --- MAIN CONTENT --- */
         .main-content { flex: 1; padding: 40px; overflow-y: auto; }
@@ -214,9 +200,8 @@
             <input type="text" id="searchInput" class="search-input" placeholder="Enter Token Number">
             <button class="search-btn" onclick="searchFeedback()">Check Status</button>
         </div>
-
-        <button class="logout-btn" onclick="logout()">← Logout</button>
-    </div>
+        
+        </div>
 
     <div class="main-content">
         <div class="container">
@@ -281,13 +266,7 @@
         // ==========================================
 
         window.onload = function() {
-            const role = sessionStorage.getItem("userRole");
-            // No longer fetching name from session storage for display
-            // Default "Dear Employee" is hardcoded in HTML
-            if (role !== "employee") {
-                alert("Access Denied. Please Login.");
-                window.location.href = "index.html"; 
-            }
+            // Login check removed. Page loads directly.
             generateToken();
         };
 
@@ -373,7 +352,7 @@
             .then(response => response.json())
             .then(data => {
                 loading.style.display = 'none';
-                loading.innerText = "Submitting Feedback..."; // Reset text
+                loading.innerText = ""; // Reset text
 
                 if(data.length > 0) {
                     displaySearchResult(data[0]);
@@ -395,7 +374,7 @@
             for(let i=1; i<=15; i++) {
                 let key = i === 15 ? 'Comments' : 'Q' + i;
                 let val = row[key] || "N/A";
-                let questionText = fullQuestions[key] || `Question ${i}`; // Fallback if map fails
+                let questionText = fullQuestions[key] || `Question ${i}`; 
 
                 html += `
                     <div class="result-qa">
@@ -410,11 +389,6 @@
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
-        }
-
-        function logout() {
-            sessionStorage.clear();
-            window.location.href = "index.html";
         }
     </script>
 
