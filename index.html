@@ -46,7 +46,17 @@
         }
 
         .welcome-label { font-size: 20px; font-weight: bold; margin-bottom: 5px; text-align: center;}
-        .greet-note { font-size: 13px; opacity: 0.95; margin-bottom: 30px; font-style: italic; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 15px; text-align: center;}
+        
+        .greet-note { 
+            font-size: 13px; 
+            opacity: 0.95; 
+            margin-bottom: 30px; 
+            font-style: italic; 
+            border-bottom: 1px solid rgba(255,255,255,0.3); 
+            padding-bottom: 15px; 
+            text-align: center;
+            line-height: 1.4;
+        }
 
         .menu-item { padding: 12px 15px; cursor: pointer; border-radius: 8px; transition: 0.3s; font-weight: 500; margin-bottom: 5px; }
         .menu-item:hover { background-color: #00796B; }
@@ -82,6 +92,9 @@
         }
         .search-btn:hover { background-color: #00251a; }
 
+        .logout-btn { margin-top: auto; background-color: rgba(0,0,0,0.1); border: none; padding: 15px; color: white; cursor: pointer; border-radius: 8px; font-weight: bold; text-align: left; }
+        .logout-btn:hover { background-color: rgba(0,0,0,0.2); }
+
         /* --- MAIN CONTENT --- */
         .main-content { flex: 1; padding: 40px; overflow-y: auto; }
         .container { max-width: 900px; margin: 0 auto; }
@@ -94,10 +107,41 @@
             margin-bottom: 30px;
         }
 
-        h2 { color: #2c3e50; margin-top: 0; border-bottom: 2px solid #009688; padding-bottom: 10px; display: inline-block; }
+        /* HEADER STYLES */
+        .header-container {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        h2 { 
+            color: #2c3e50; 
+            margin: 0; 
+            padding-bottom: 10px; 
+            text-transform: uppercase; 
+            font-size: 28px; 
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .part-header {
+            color: #00796B;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 18px;
+            margin-top: 5px;
+            display: inline-block;
+            background: #e0f2f1;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        h3 { color: #00796B; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 30px; font-size: 18px; }
         
         /* FORM STYLES */
-        input[type="text"], textarea {
+        input[type="text"], select, textarea {
             width: 100%;
             padding: 12px;
             border-radius: 6px;
@@ -105,13 +149,15 @@
             font-family: 'Segoe UI', sans-serif;
             box-sizing: border-box;
             transition: 0.3s;
+            background-color: white;
+            font-size: 14px;
         }
         
-        input:focus, textarea:focus { border-color: #009688; outline: none; box-shadow: 0 0 5px rgba(0, 150, 136, 0.3); }
+        input:focus, select:focus, textarea:focus { border-color: #009688; outline: none; box-shadow: 0 0 5px rgba(0, 150, 136, 0.3); }
         textarea { height: 100px; resize: vertical; }
 
-        .question-block { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-        .question-text { font-size: 16px; color: #333; margin-bottom: 10px; font-weight: 500; }
+        .question-block { margin-bottom: 20px; }
+        .question-text { font-size: 15px; color: #333; margin-bottom: 8px; font-weight: 600; }
 
         .submit-btn {
             background-color: #009688;
@@ -124,7 +170,7 @@
             font-size: 18px;
             width: 100%;
             transition: 0.3s;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .submit-btn:hover { background-color: #00796B; transform: translateY(-2px); }
 
@@ -132,50 +178,35 @@
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
         .modal-content { 
             background-color: white; 
-            margin: 5% auto; /* Higher position */
+            margin: 2% auto; 
             padding: 30px; 
             border-radius: 10px; 
-            width: 60%; 
-            max-width: 700px;
+            width: 80%; 
+            max-width: 900px;
             color: #333; 
             box-shadow: 0 5px 25px rgba(0,0,0,0.3); 
             border-top: 10px solid #009688;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
         }
         .close { float: right; font-size: 28px; font-weight: bold; cursor: pointer; color: #aaa; }
         .close:hover { color: #000; }
 
-        /* Success Message Specifics */
-        .success-token { 
-            font-size: 24px; 
-            font-weight: bold; 
-            color: #009688; 
-            display: block; 
-            margin: 15px 0; 
-            background: #e0f2f1; 
-            padding: 10px; 
-            border-radius: 5px; 
-        }
+        .success-token { font-size: 24px; font-weight: bold; color: #009688; display: block; margin: 15px 0; background: #e0f2f1; padding: 10px; border-radius: 5px; }
         .success-note { color: #d32f2f; font-weight: 500; font-style: italic; margin-top: 10px; }
 
-        /* Search Result Specifics */
-        .result-qa { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .result-q { font-weight: bold; color: #444; font-size: 15px; display: block; margin-bottom: 5px;}
-        .result-a { color: #009688; font-weight: bold; font-size: 16px; margin-left: 10px; display: block;}
+        /* ROW WISE DETAIL TABLE */
+        .detail-table { width: 100%; border: 1px solid #eee; margin-top: 15px; border-collapse: collapse; }
+        .detail-table th { background-color: #009688; color: white; padding: 10px; text-align: left;}
+        .detail-table td { border-bottom: 1px solid #eee; padding: 10px; vertical-align: top; }
+        
+        .section-row { background-color: #00796B; color: white; text-align: center; font-weight: bold; font-size: 15px; letter-spacing: 1px; }
+        
+        .dt-qno { width: 50px; text-align: center; font-weight: bold; color: #888; border-right: 1px solid #eee; }
+        .dt-que { width: 55%; font-weight: 600; color: #333; border-right: 1px solid #eee; }
+        .dt-ans { font-weight: bold; color: #009688; background-color: #e0f2f1; }
 
-        /* Loading Overlay */
-        #loading-overlay {
-            display: none;
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.8);
-            z-index: 999;
-            text-align: center;
-            padding-top: 20%;
-            font-size: 24px;
-            color: #009688;
-            font-weight: bold;
-        }
+        #loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 999; text-align: center; padding-top: 20%; font-size: 24px; color: #009688; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -200,34 +231,102 @@
             <input type="text" id="searchInput" class="search-input" placeholder="Enter Token Number">
             <button class="search-btn" onclick="searchFeedback()">Check Status</button>
         </div>
-        
-        </div>
+
+        <button class="logout-btn" onclick="logout()">← Logout</button>
+    </div>
 
     <div class="main-content">
         <div class="container">
             <div class="card">
-                <h2>Annual Employee Feedback</h2>
-                <p>Please provide your valuable feedback below. A unique token will be generated automatically.</p>
+                
+                <div class="header-container">
+                    <h2>AI Infotech Employee Experience Survey</h2>
+                    <div class="part-header">Part 1</div>
+                </div>
+
+                <p style="text-align:center; color:#666;">Please provide your feedback for each section below. A unique token will be generated automatically upon submission.</p>
                 
                 <form id="feedbackForm" onsubmit="submitToSheetDB(event)">
-                    
                     <input type="hidden" name="Token" id="tokenField">
 
-                    <div class="question-block"><div class="question-text">1. How satisfied are you with your overall experience working at AI Infotech?</div><input type="text" name="Q1" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">2. Do you clearly understand your role and responsibilities?</div><input type="text" name="Q2" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">3. How would you rate the work environment and office culture?</div><input type="text" name="Q3" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">4. Do you feel respected and valued by your team and management?</div><input type="text" name="Q4" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">5. How effective is communication between employees and management?</div><input type="text" name="Q5" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">6. Are you satisfied with the support and guidance provided by your immediate supervisor?</div><input type="text" name="Q6" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">7. Do you feel the workload assigned to you is reasonable and manageable?</div><input type="text" name="Q7" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">8. Are you provided with the necessary tools, resources, and technology?</div><input type="text" name="Q8" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">9. How satisfied are you with the learning and skill development opportunities?</div><input type="text" name="Q9" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">10. Do you feel there are fair opportunities for career growth and promotion?</div><input type="text" name="Q10" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">11. How would you rate the company’s policies related to work-life balance?</div><input type="text" name="Q11" placeholder="Type your answer here..." required></div>
+                    <h3>Section A: Work Environment & Resources</h3>
+                    <div class="question-block"><div class="question-text">1. Is the office space maintained neat and clean?</div><input type="text" name="Q1" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">2. How is the access to the office premises? Is it easy to reach?</div><input type="text" name="Q2" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">3. Are you provided with the necessary tools, resources, and technology to perform your job effectively?</div><input type="text" name="Q3" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">4. Is the facility having/providing necessary things for your basic needs?</div><input type="text" name="Q4" placeholder="Type your answer here..." required></div>
+
+                    <h3>Section B: Role, Workload & Support</h3>
+                    <div class="question-block"><div class="question-text">5. Do you clearly understand your role and responsibilities?</div><input type="text" name="Q5" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">6. Do you feel the workload assigned to you is reasonable and manageable?</div><input type="text" name="Q6" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">7. Are you satisfied with the support and guidance provided by your immediate supervisor/manager?</div><input type="text" name="Q7" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">8. Is proper training and knowledge transfer available for the program you work on?</div><input type="text" name="Q8" placeholder="Type your answer here..." required></div>
+
+                    <h3>Section C: Communication, Culture & Respect</h3>
+                    <div class="question-block"><div class="question-text">9. How effective is communication between employees and management?</div><input type="text" name="Q9" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">10. How would you rate the work environment and office culture?</div><input type="text" name="Q10" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">11. Do you feel respected and valued by your team and management?</div><input type="text" name="Q11" placeholder="Type your answer here..." required></div>
                     <div class="question-block"><div class="question-text">12. Are your ideas, suggestions, or feedback encouraged and taken seriously?</div><input type="text" name="Q12" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">13. How satisfied are you with the salary, incentives, and benefits provided?</div><input type="text" name="Q13" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">14. Would you recommend AI Infotech as a good place to work to others?</div><input type="text" name="Q14" placeholder="Type your answer here..." required></div>
-                    <div class="question-block"><div class="question-text">15. What improvements or changes would you suggest? (And other comments)</div><textarea name="Comments" placeholder="Type your detailed suggestions here..." required></textarea></div>
+
+                    <h3>Section D: Growth, Compensation & Balance</h3>
+                    <div class="question-block"><div class="question-text">13. How satisfied are you with the learning and skill development opportunities offered by the company?</div><input type="text" name="Q13" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">14. Do you feel there are fair opportunities for career growth and promotion?</div><input type="text" name="Q14" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">15. How satisfied are you with the salary, incentives, and benefits provided?</div><input type="text" name="Q15" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">16. How would you rate the company’s policies related to work-life balance?</div><input type="text" name="Q16" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">17. Are the shift timings convenient for you? (Do you have any issues with commuting?)</div><input type="text" name="Q17" placeholder="Type your answer here..." required></div>
+
+                    <h3>Section E: Overall Engagement</h3>
+                    <div class="question-block"><div class="question-text">18. How satisfied are you with your overall experience working here?</div><input type="text" name="Q18" placeholder="Type your answer here..." required></div>
+                    <div class="question-block"><div class="question-text">19. Would you recommend this company as a good place to work to others?</div><input type="text" name="Q19" placeholder="Type your answer here..." required></div>
+
+                    <h3>Section F: Suggestions for Improvement</h3>
+                    <div class="question-block"><div class="question-text">20. What improvements or changes would you suggest? (Please describe below.)</div><textarea name="Q20" placeholder="Type your detailed suggestions here..." required></textarea></div>
+
+                    <div class="header-container" style="margin-top: 50px; border-bottom: none;">
+                        <div class="part-header">Part 2</div>
+                    </div>
+
+                    <h3>Section 1: Work Environment & Resources</h3>
+                    <div class="question-block"><div class="question-text">21. How would you rate the cleanliness and maintenance of the office space?</div><select name="Q21" required><option disabled selected>Select...</option><option>Excellent</option><option>Good</option><option>Fair</option><option>Poor</option></select></div>
+                    <div class="question-block"><div class="question-text">22. How easy is it to access and reach the office premises?</div><select name="Q22" required><option disabled selected>Select...</option><option>Very Easy</option><option>Somewhat Easy</option><option>Somewhat Difficult</option><option>Very Difficult</option></select></div>
+                    <div class="question-block"><div class="question-text">23. Are you provided with the necessary tools and technology to perform your job effectively?</div><select name="Q23" required><option disabled selected>Select...</option><option>Yes, always</option><option>Yes, most of the time</option><option>Sometimes</option><option>No, rarely or never</option></select></div>
+                    <div class="question-block"><div class="question-text">24. Does the facility adequately provide for your basic needs?</div><select name="Q24" required><option disabled selected>Select...</option><option>Yes, fully</option><option>Yes, for the most part</option><option>Only partially</option><option>No, not adequately</option></select></div>
+
+                    <h3>Section 2: Role, Workload & Support</h3>
+                    <div class="question-block"><div class="question-text">25. Do you clearly understand your primary role and responsibilities?</div><select name="Q25" required><option disabled selected>Select...</option><option>Yes, completely</option><option>Yes, for the most part</option><option>Only somewhat</option><option>No, not clearly</option></select></div>
+                    <div class="question-block"><div class="question-text">26. How manageable is your typical workload?</div><select name="Q26" required><option disabled selected>Select...</option><option>Very manageable</option><option>Manageable with occasional stress</option><option>Often overwhelming</option><option>Consistently unmanageable</option></select></div>
+                    <div class="question-block"><div class="question-text">27. How would you rate the support and guidance from your immediate supervisor/manager?</div><select name="Q27" required><option disabled selected>Select...</option><option>Excellent</option><option>Good</option><option>Fair</option><option>Poor</option></select></div>
+                    <div class="question-block"><div class="question-text">28. How effective is the training and knowledge transfer for your program?</div><select name="Q28" required><option disabled selected>Select...</option><option>Very effective</option><option>Somewhat effective</option><option>Ineffective</option><option>No formal training/knowledge transfer is provided</option></select></div>
+
+                    <h3>Section 3: Communication, Culture & Respect</h3>
+                    <div class="question-block"><div class="question-text">29. How effective is the communication between employees and senior management?</div><select name="Q29" required><option disabled selected>Select...</option><option>Very effective</option><option>Somewhat effective</option><option>Somewhat ineffective</option><option>Very ineffective</option></select></div>
+                    <div class="question-block"><div class="question-text">30. How would you describe the overall work environment and office culture?</div><select name="Q30" required><option disabled selected>Select...</option><option>Very positive and collaborative</option><option>Mostly positive</option><option>Neutral</option><option>Negative or toxic</option></select></div>
+                    <div class="question-block"><div class="question-text">31. Do you feel respected and valued by your team and management?</div><select name="Q31" required><option disabled selected>Select...</option><option>Yes, consistently</option><option>Yes, most of the time</option><option>Occasionally</option><option>Rarely or never</option></select></div>
+                    <div class="question-block"><div class="question-text">32. Are your ideas and feedback encouraged and acted upon?</div><select name="Q32" required><option disabled selected>Select...</option><option>Yes, regularly</option><option>Sometimes</option><option>Rarely</option><option>No, they are generally ignored</option></select></div>
+
+                    <h3>Section 4: Growth, Compensation & Balance</h3>
+                    <div class="question-block"><div class="question-text">33. How satisfied are you with learning and skill development opportunities?</div><select name="Q33" required><option disabled selected>Select...</option><option>Very satisfied</option><option>Somewhat satisfied</option><option>Neutral</option><option>Dissatisfied</option></select></div>
+                    <div class="question-block"><div class="question-text">34. How do you view opportunities for career growth and promotion here?</div><select name="Q34" required><option disabled selected>Select...</option><option>Fair and transparent</option><option>Fair but not transparent</option><option>Limited opportunities</option><option>Unfair or biased</option></select></div>
+                    <div class="question-block"><div class="question-text">35. How satisfied are you with your overall compensation (salary, incentives, benefits)?</div><select name="Q35" required><option disabled selected>Select...</option><option>Very satisfied</option><option>Somewhat satisfied</option><option>Neutral</option><option>Dissatisfied</option></select></div>
+                    <div class="question-block"><div class="question-text">36. How do you rate the company's support for work-life balance?</div><select name="Q36" required><option disabled selected>Select...</option><option>Strongly supportive</option><option>Somewhat supportive</option><option>Neutral</option><option>Unsupportive</option></select></div>
+                    <div class="question-block"><div class="question-text">37. How convenient are your shift timings and commute?</div><select name="Q37" required><option disabled selected>Select...</option><option>Very convenient</option><option>Convenient with minor issues</option><option>Inconvenient</option><option>Very inconvenient</option></select></div>
+
+                    <h3>Section 5: Overall Engagement</h3>
+                    <div class="question-block"><div class="question-text">38. Overall, how satisfied are you working at AI Infotech?</div><select name="Q38" required><option disabled selected>Select...</option><option>Very satisfied</option><option>Satisfied</option><option>Neutral</option><option>Dissatisfied</option><option>Very dissatisfied</option></select></div>
+                    <div class="question-block"><div class="question-text">39. How likely are you to recommend AI Infotech as a workplace to a friend?</div><select name="Q39" required><option disabled selected>Select...</option><option>Very Likely (Promoter)</option><option>Likely (Passive)</option><option>Unlikely (Detractor)</option></select></div>
+
+                    <div class="header-container" style="margin-top: 50px; border-bottom: none;">
+                        <div class="part-header">Part 3</div>
+                    </div>
+
+                    <h3>Detailed Feedback & Suggestions</h3>
+                    <div class="question-block">
+                        <div class="question-text">40. Please share any specific issues, ideas for improvement, or detailed suggestions you have.</div>
+                        <textarea name="Q40" placeholder="Open text..." required></textarea>
+                    </div>
+                    <div class="question-block">
+                        <div class="question-text">41. If you selected "No," "Rarely," "Poor," "Dissatisfied," or "Unsupportive" to any question above, please feel free to explain the specific challenge here.</div>
+                        <textarea name="Q41" placeholder="Open text..."></textarea>
+                    </div>
 
                     <button type="submit" class="submit-btn">Submit Feedback</button>
                 </form>
@@ -240,9 +339,7 @@
             <span class="close" onclick="closeModal('successModal')">&times;</span>
             <h2 style="color: #009688;">Submission Successful!</h2>
             <p>Your feedback has been recorded.</p>
-            
             <span id="displayToken" class="success-token">TOKEN</span>
-            
             <p class="success-note">
                 "Dear employee note this token number to view your feedback, If you entered wrong please give a new feedback in the same"
             </p>
@@ -253,22 +350,15 @@
     <div id="searchModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('searchModal')">&times;</span>
-            <h2 style="color: #009688; border-bottom: 2px solid #009688; padding-bottom: 10px;">My Feedback</h2>
+            <h2 id="modalTitle" style="text-align:center; color: #009688;">Feedback Details</h2>
             <div id="searchResultContent"></div>
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // CONFIGURATION: YOUR SHEETDB API URL
-        // ==========================================
-        const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/r781uwwg4lmp9'; 
-        // ==========================================
+        const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/2h2w1v1ug85h6'; 
 
-        window.onload = function() {
-            // Login check removed. Page loads directly.
-            generateToken();
-        };
+        window.onload = function() { generateToken(); };
 
         function generateToken() {
             const timestamp = Date.now().toString().slice(-4);
@@ -279,7 +369,6 @@
 
         function submitToSheetDB(e) {
             e.preventDefault();
-            
             const form = document.getElementById('feedbackForm');
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
@@ -289,23 +378,15 @@
 
             fetch(SHEETDB_API_URL, {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: [ data ]
-                })
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: [ data ] })
             })
             .then(response => response.json())
             .then(result => {
                 loading.style.display = 'none';
-                
                 if(result.created === 1) {
-                    // SHOW SUCCESS MODAL
                     document.getElementById('displayToken').innerText = data.Token;
                     document.getElementById('successModal').style.display = 'block';
-                    
                     form.reset();
                     generateToken();
                 } else {
@@ -314,31 +395,55 @@
             })
             .catch(error => {
                 loading.style.display = 'none';
-                console.error("Error:", error);
                 alert("Network Error: Could not connect to SheetDB.");
             });
         }
 
-        // --- MAPPING FOR FULL QUESTIONS ---
-        const fullQuestions = {
-            "Q1": "1. How satisfied are you with your overall experience working at AI Infotech?",
-            "Q2": "2. Do you clearly understand your role and responsibilities?",
-            "Q3": "3. How would you rate the work environment and office culture?",
-            "Q4": "4. Do you feel respected and valued by your team and management?",
-            "Q5": "5. How effective is communication between employees and management?",
-            "Q6": "6. Are you satisfied with the support and guidance provided by your immediate supervisor?",
-            "Q7": "7. Do you feel the workload assigned to you is reasonable and manageable?",
-            "Q8": "8. Are you provided with the necessary tools, resources, and technology?",
-            "Q9": "9. How satisfied are you with the learning and skill development opportunities?",
-            "Q10": "10. Do you feel there are fair opportunities for career growth and promotion?",
-            "Q11": "11. How would you rate the company’s policies related to work-life balance?",
-            "Q12": "12. Are your ideas, suggestions, or feedback encouraged and taken seriously?",
-            "Q13": "13. How satisfied are you with the salary, incentives, and benefits provided?",
-            "Q14": "14. Would you recommend AI Infotech as a good place to work to others?",
-            "Comments": "15. What improvements or changes would you suggest? (And other comments)"
+        // --- FULL QUESTION MAPPING (Cleaned for Display) ---
+        const questionMap = {
+            "Q1": "Is the office space maintained neat and clean?",
+            "Q2": "How is the access to the office premises? Is it easy to reach?",
+            "Q3": "Are you provided with the necessary tools, resources, and technology?",
+            "Q4": "Is the facility having/providing necessary things for your basic needs?",
+            "Q5": "Do you clearly understand your role and responsibilities?",
+            "Q6": "Do you feel the workload assigned to you is reasonable and manageable?",
+            "Q7": "Are you satisfied with the support and guidance provided by your immediate supervisor/manager?",
+            "Q8": "Is proper training and knowledge transfer available for the program you work on?",
+            "Q9": "How effective is communication between employees and management?",
+            "Q10": "How would you rate the work environment and office culture?",
+            "Q11": "Do you feel respected and valued by your team and management?",
+            "Q12": "Are your ideas, suggestions, or feedback encouraged and taken seriously?",
+            "Q13": "How satisfied are you with the learning and skill development opportunities?",
+            "Q14": "Do you feel there are fair opportunities for career growth and promotion?",
+            "Q15": "How satisfied are you with the salary, incentives, and benefits provided?",
+            "Q16": "How would you rate the company’s policies related to work-life balance?",
+            "Q17": "Are the shift timings convenient for you? (Do you have any issues with commuting?)",
+            "Q18": "How satisfied are you with your overall experience working here?",
+            "Q19": "Would you recommend this company as a good place to work to others?",
+            "Q20": "What improvements or changes would you suggest? (Please describe below.)",
+            "Q21": "How would you rate the cleanliness and maintenance of the office space?",
+            "Q22": "How easy is it to access and reach the office premises?",
+            "Q23": "Are you provided with the necessary tools and technology to perform your job effectively?",
+            "Q24": "Does the facility adequately provide for your basic needs?",
+            "Q25": "Do you clearly understand your primary role and responsibilities?",
+            "Q26": "How manageable is your typical workload?",
+            "Q27": "How would you rate the support and guidance from your immediate supervisor/manager?",
+            "Q28": "How effective is the training and knowledge transfer for your program?",
+            "Q29": "How effective is the communication between employees and senior management?",
+            "Q30": "How would you describe the overall work environment and office culture?",
+            "Q31": "Do you feel respected and valued by your team and management?",
+            "Q32": "Are your ideas and feedback encouraged and acted upon?",
+            "Q33": "How satisfied are you with learning and skill development opportunities?",
+            "Q34": "How do you view opportunities for career growth and promotion here?",
+            "Q35": "How satisfied are you with your overall compensation (salary, incentives, benefits)?",
+            "Q36": "How do you rate the company's support for work-life balance?",
+            "Q37": "How convenient are your shift timings and commute?",
+            "Q38": "Overall, how satisfied are you working at AI Infotech?",
+            "Q39": "How likely are you to recommend AI Infotech as a workplace to a friend?",
+            "Q40": "Detailed: Please share any specific issues, ideas for improvement.",
+            "Q41": "Detailed: Explanation of specific challenges (if applicable)."
         };
 
-        // --- SEARCH FUNCTIONALITY ---
         function searchFeedback() {
             const token = document.getElementById('searchInput').value.trim();
             if(!token) { alert("Please enter a Token Number"); return; }
@@ -347,12 +452,11 @@
             loading.style.display = 'block';
             loading.innerText = "Searching...";
 
-            // SheetDB Search API
             fetch(`${SHEETDB_API_URL}/search?Token=${token}`)
             .then(response => response.json())
             .then(data => {
                 loading.style.display = 'none';
-                loading.innerText = ""; // Reset text
+                loading.innerText = ""; 
 
                 if(data.length > 0) {
                     displaySearchResult(data[0]);
@@ -368,27 +472,51 @@
 
         function displaySearchResult(row) {
             const content = document.getElementById('searchResultContent');
-            let html = `<p style="font-weight:bold; color:#555;">Token: ${row.Token}</p>`;
+            
+            // Build Table Layout for Modal
+            let html = `<p style="font-weight:bold; color:#555; text-align:center;">Token: ${row.Token}</p>`;
+            html += `
+                <table class="detail-table">
+                    <thead>
+                        <tr>
+                            <th style="width:50px;">No</th>
+                            <th>Question</th>
+                            <th>Your Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
 
-            // Iterate through 15 Questions using the MAP
-            for(let i=1; i<=15; i++) {
-                let key = i === 15 ? 'Comments' : 'Q' + i;
+            for(let i=1; i<=41; i++) {
+                // Section Headers
+                if(i === 1) html += `<tr><td colspan="3" class="section-row">Part 1: Text Based Feedback</td></tr>`;
+                if(i === 21) html += `<tr><td colspan="3" class="section-row">Part 2: Multiple Choice Feedback</td></tr>`;
+                if(i === 40) html += `<tr><td colspan="3" class="section-row">Part 3: Detailed Feedback</td></tr>`;
+
+                let key = 'Q' + i;
                 let val = row[key] || "N/A";
-                let questionText = fullQuestions[key] || `Question ${i}`; 
+                let questionText = questionMap[key] || `Question ${i}`;
 
                 html += `
-                    <div class="result-qa">
-                        <span class="result-q">${questionText}</span><br>
-                        <span class="result-a">${val}</span>
-                    </div>
+                    <tr>
+                        <td class="dt-qno">${i}</td>
+                        <td class="dt-que">${questionText}</td>
+                        <td class="dt-ans">${val}</td>
+                    </tr>
                 `;
             }
+            html += `</tbody></table>`;
             content.innerHTML = html;
             document.getElementById('searchModal').style.display = 'block';
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = "index.html";
         }
     </script>
 
