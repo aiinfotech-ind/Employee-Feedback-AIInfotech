@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Infotech - Employee Portal Access</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            height: 100vh; 
+            background-color: #e0f2f1; /* Employee Teal Theme Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- CENTERED CARD STYLES --- */
+        .login-card {
+            background-color: #f4f6f9; /* White-ish card */
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 0.8s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- LOGO STYLE --- */
+        .logo {
+            width: 120px; 
+            height: 120px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #004D40; /* Dark Teal */
+            border-radius: 50%; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+            border: 4px solid rgba(255,255,255,0.3);
+            overflow: hidden;
+        }
+        
+        .logo img {
+            max-width: 85%;
+            height: auto;
+        }
+
+        h1 { 
+            margin-bottom: 5px; 
+            color: #00796B; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-size: 1.8rem; 
+        }
+
+        p { color: #666; margin-bottom: 30px; font-size: 14px; }
+
+        /* FORM STYLES */
+        form { display: flex; flex-direction: column; gap: 15px; }
+        
+        input { 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid #ccc; 
+            font-size: 15px; 
+            background: white;
+            transition: 0.3s;
+        }
+        input:focus { border-color: #009688; outline: none; box-shadow: 0 0 5px rgba(0,150,136,0.2); }
+
+        /* BUTTONS */
+        button { 
+            padding: 15px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold; 
+            color: white; 
+            transition: 0.3s; 
+            background-color: #009688; 
+            margin-top: 10px;
+        }
+        button:hover { background-color: #00796B; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,150,136,0.3); }
+
+        /* LOADING SPINNER */
+        #login-loading { display: none; margin-top: 15px; color: #00796B; font-weight: bold; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo">
+            <img src="aiinfo.webp" alt="Logo">
+        </div>
+        <h1>Employee Portal</h1>
+        <p>Please log in to access your dashboard</p>
+
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="emp-id" placeholder="Employee ID (e.g. employee@aiinfotech)" required>
+            <input type="password" id="emp-pass" placeholder="Password" required>
+            
+            <button type="submit" id="emp-login-btn">Secure Login</button>
+            <div id="login-loading">Verifying Credentials...</div>
+        </form>
+    </div>
+
+    <script>
+        // SHEETDB API URL
+        const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/2h2w1v1ug85h6'; 
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('emp-id').value;
+            const pass = document.getElementById('emp-pass').value;
+            const btn = document.getElementById('emp-login-btn');
+            const loading = document.getElementById('login-loading');
+
+            // 1. Pre-check ID format
+            if(id !== "employee@aiinfotech") {
+                alert("Invalid Employee ID. Please use the official ID provided.");
+                return;
+            }
+
+            // 2. Start API Check
+            btn.style.display = 'none';
+            loading.style.display = 'block';
+
+            // Fetch the specific user row for 'employee'
+            fetch(`${SHEETDB_API_URL}/search?Username=employee`)
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                btn.style.display = 'block';
+                
+                let validPassword = "employee123"; // Default Password
+
+                // Logic: If user exists AND has a password in DB, use it.
+                // Otherwise (row missing or password blank), keep default 'employee123'.
+                if (data.length > 0 && data[0].Password && data[0].Password.trim() !== "") {
+                    validPassword = data[0].Password.trim();
+                }
+
+                if (pass === validPassword) {
+                     sessionStorage.setItem("userRole", "employee");
+                     window.location.href = "employee_dashboard.html";
+                } else {
+                    alert("Invalid Password. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                loading.style.display = 'none';
+                btn.style.display = 'block';
+                
+                // Fallback in case of Network Error: Allow Default login to prevent lockout
+                if(pass === "employee123") {
+                    sessionStorage.setItem("userRole", "employee");
+                    window.location.href = "employee_dashboard.html";
+                } else {
+                    alert("Network Error. Unable to verify credentials.");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
